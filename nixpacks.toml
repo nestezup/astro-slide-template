@@ -1,0 +1,5 @@
+[phases.build]
+cmds = ["npm run build"]
+
+[start]
+cmd = "npx astro preview --port 80 --host"

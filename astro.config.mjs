@@ -7,7 +7,9 @@ export default defineConfig({
       wrap: true,
     },
   },
-  server: {
-    allowedHosts: true,
+  vite: {
+    preview: {
+      allowedHosts: true,
+    },
   },
 });
