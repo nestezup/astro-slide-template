@@ -7,8 +7,16 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM nginx:alpine
-COPY --from=builder /app/dist /usr/share/nginx/html
+FROM node:20-alpine
+WORKDIR /app
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+COPY --from=builder /app/package*.json ./
+RUN npm ci --only=production
+
+COPY --from=builder /app/dist ./dist
+
+ENV HOST=0.0.0.0
+ENV PORT=14321
+EXPOSE 14321
+
+CMD ["npm", "run", "preview"]
