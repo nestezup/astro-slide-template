@@ -1,0 +1,74 @@
+---
+import '../styles/global.css';
+import '../styles/markdown.css';
+interface Props {
+  title?: string;
+}
+
+const { title = 'Slide' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Slide: {title}</title>
+</head>
+<body>
+  <slot />
+  
+  <script>
+    function initializeOverflowDetection() {
+      const observer = new ResizeObserver(entries => {
+        for (const entry of entries) {
+          const el = entry.target;
+          if (el.classList.contains('slide-content')) {
+            const isOverflowing = 
+              el.scrollHeight > el.clientHeight || 
+              el.scrollWidth > el.clientWidth;
+            
+            el.classList.toggle('overflow-warning', isOverflowing);
+            
+            if (isOverflowing) {
+              console.warn('⚠️ Content overflow detected on slide:', el);
+            }
+          }
+        }
+      });
+
+      document.querySelectorAll('.slide-content').forEach(el => {
+        observer.observe(el);
+      });
+
+      return observer;
+    }
+
+    function initializeKeyboardNavigation() {
+      const slides = Array.from(document.querySelectorAll('.nav-button'));
+      const currentIndex = slides.findIndex(slide => 
+        window.location.pathname.includes(slide.getAttribute('href') || '')
+      );
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          const prevLink = document.querySelector('.nav-button.prev') as HTMLAnchorElement;
+          if (prevLink) {
+            prevLink.click();
+          }
+        } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          const nextLink = document.querySelector('.nav-button.next') as HTMLAnchorElement;
+          if (nextLink) {
+            nextLink.click();
+          }
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      (window as any).overflowObserver = initializeOverflowDetection();
+      initializeKeyboardNavigation();
+    });
+  </script>
+</body>
+</html>

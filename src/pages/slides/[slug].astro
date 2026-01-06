@@ -1,0 +1,43 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import Slide from '../../components/Slide.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import Navigation from '../../components/Navigation.astro';
+
+export async function getStaticPaths() {
+  const slides = await getCollection('slides');
+  return slides.map((slide: any) => ({
+    params: { slug: slide.id },
+    props: { slide, allSlides: slides },
+  }));
+}
+
+const { slide, allSlides }: { slide: any; allSlides: any[] } = Astro.props;
+const { Content } = await slide.render();
+---
+
+<Layout title={slide.data.title}>
+  <Sidebar slides={allSlides} currentSlug={slide.id} />
+  <main class="main-content">
+    <Slide title={slide.data.title}>
+      <Content />
+    </Slide>
+  </main>
+  <Navigation slides={allSlides} currentSlug={slide.id} />
+</Layout>
+
+<style>
+  .main-content {
+    margin-left: 280px;
+    width: calc(100% - 280px);
+    min-height: 100vh;
+  }
+
+  @media (max-width: 768px) {
+    .main-content {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+</style>

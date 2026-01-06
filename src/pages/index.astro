@@ -1,16 +1,197 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 
+const slides = await getCollection('slides');
+const sortedSlides = slides.sort((a: any, b: any) => a.data.order - b.data.order);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Bun API 서버 강의">
+  <main class="home-main">
+    <div class="hero">
+      <h1 class="hero-title">Bun으로 API 서버 만들기</h1>
+      <p class="hero-description">
+        Astro와 마크다운으로 만든 강의 슬라이드 시스템
+      </p>
+    </div>
+
+    <div class="slides-grid">
+      <h2 class="section-title">강의 목록</h2>
+      <div class="slides-list">
+        {sortedSlides.map((slide: any) => (
+          <a href={`/slides/${slide.id}`} class="slide-card">
+            <div class="slide-card-number">
+              {String(slide.data.order).padStart(2, '0')}
+            </div>
+            <div class="slide-card-content">
+              <h3 class="slide-card-title">{slide.data.title}</h3>
+              <p class="slide-card-link">보러 가기 →</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="features">
+      <h2 class="section-title">이 시스템의 특징</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>📝 마크다운 기반</h3>
+          <p>글만 작성하면 자동으로 예쁜 슬라이드로 변환</p>
+        </div>
+        <div class="feature-card">
+          <h3>🎨 예쁜 스타일링</h3>
+          <p>Paperlogy 폰트와 현대적인 디자인</p>
+        </div>
+        <div class="feature-card">
+          <h3>⚡ 빠른 개발</h3>
+          <p>자동 수집, 넘침 감지, 키보드 네비게이션</p>
+        </div>
+        <div class="feature-card">
+          <h3>📱 반응형</h3>
+          <p>모든 기기에서 완벽한 표현</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .home-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .hero {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .hero-title {
+    font-size: 4rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+  }
+
+  .hero-description {
+    font-size: 1.5rem;
+    color: var(--color-text);
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    margin: 0 0 2rem 0;
+    text-align: center;
+  }
+
+  .slides-grid {
+    margin-bottom: 4rem;
+  }
+
+  .slides-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .slide-card {
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    background: white;
+    border: 2px solid var(--color-border);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: all 0.3s ease;
+    gap: 1.5rem;
+  }
+
+  .slide-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .slide-card-number {
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    opacity: 0.6;
+    min-width: 3rem;
+  }
+
+  .slide-card-content {
+    flex: 1;
+  }
+
+  .slide-card-title {
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-bold);
+    margin: 0 0 0.5rem 0;
+    color: var(--color-text);
+  }
+
+  .slide-card-link {
+    font-size: 0.875rem;
+    color: var(--color-primary);
+    margin: 0;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .feature-card {
+    text-align: center;
+    padding: 2rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+  }
+
+  .feature-card h3 {
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+    color: var(--color-primary);
+  }
+
+  .feature-card p {
+    font-size: 1rem;
+    margin: 0;
+    opacity: 0.8;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .home-main {
+      padding: 1rem;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .hero-description {
+      font-size: 1.25rem;
+    }
+
+    .slide-card {
+      padding: 1.5rem;
+    }
+
+    .slide-card-number {
+      font-size: 2rem;
+    }
+  }
+</style>
