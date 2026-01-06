@@ -19,4 +19,4 @@ ENV HOST=0.0.0.0
 ENV PORT=${PORT:-80}
 EXPOSE ${PORT:-80}
 
-CMD ["sh", "-c", "npm run preview"]
+CMD ["sh", "-c", "npx astro preview --port $PORT --host"]
