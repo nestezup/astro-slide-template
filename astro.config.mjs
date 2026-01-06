@@ -7,7 +7,4 @@ export default defineConfig({
       wrap: true,
     },
   },
-  server: {
-    allowedHosts: true, // Allow all hosts
-  },
 });
