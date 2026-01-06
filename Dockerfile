@@ -16,7 +16,7 @@ RUN npm ci --only=production
 COPY --from=builder /app/dist ./dist
 
 ENV HOST=0.0.0.0
-ENV PORT=80
-EXPOSE 80
+ENV PORT=${PORT:-80}
+EXPOSE ${PORT:-80}
 
-CMD ["npm", "run", "preview"]
+CMD ["sh", "-c", "npm run preview"]
