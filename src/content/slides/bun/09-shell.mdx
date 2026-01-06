@@ -1,0 +1,25 @@
+---
+title: "Bun Shell"
+order: 109
+---
+import Terminal from '../../../components/bun/Terminal.astro';
+
+## 크로스 플랫폼 쉘 스크립팅
+
+Windows, macOS, Linux에서 동일하게 동작하는 쉘 스크립트를 작성하세요.  
+`rimraf` 같은 패키지 없이도 가능합니다.
+
+```typescript
+import { $ } from "bun";
+
+// 모든 OS에서 작동 (ls, grep, rm 등)
+await $`ls *.js | grep server`;
+await $`echo "Hello World!"`;
+```
+
+<Terminal title="Bun Shell" command="bun script.ts">
+  server.js<br/>
+  Hello World!
+</Terminal>
+
+Bash 문법을 JavaScript 안에서 그대로 씁니다.

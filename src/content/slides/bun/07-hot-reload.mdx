@@ -1,0 +1,18 @@
+---
+title: "Hot Reloading"
+order: 107
+---
+import Terminal from '../../../components/bun/Terminal.astro';
+
+## --hot 플래그의 마법
+
+파일이 변경되면 Bun은 프로세스를 재시작하지 않고  
+**코드만 즉시 교체**합니다. 상태가 유지됩니다.
+
+<Terminal title="dev" command="bun --hot server.ts">
+  Watching for changes...<br/>
+  <span style="color: #aaa">[Reloaded] server.ts (1ms)</span>
+</Terminal>
+
+* 기존 `nodemon` 대비 훨씬 빠른 반응 속도
+* 개발 생산성의 비약적인 향상

@@ -1,0 +1,28 @@
+---
+title: "내장 테스트 러너"
+order: 106
+---
+import Terminal from '../../../components/bun/Terminal.astro';
+
+## Jest 호환, 하지만 더 빠름
+
+`bun:test`는 Jest 호환 API를 제공합니다.  
+테스트를 위해 무거운 의존성을 설치할 필요가 없습니다.
+
+```typescript
+import { describe, expect, test } from "bun:test";
+
+describe("math", () => {
+  test("adds 1 + 2 to equal 3", () => {
+    expect(1 + 2).toBe(3);
+  });
+});
+```
+
+<Terminal title="Test Result" command="bun test">
+  <div style="color: #4AF626">
+    ✓ math > adds 1 + 2 to equal 3<br/>
+    <br/>
+    1 pass (2ms)
+  </div>
+</Terminal>

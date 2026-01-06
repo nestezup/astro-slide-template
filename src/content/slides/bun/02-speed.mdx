@@ -1,0 +1,24 @@
+---
+title: "왜 Bun인가? (속도 비교)"
+order: 102
+---
+import SpeedChart from '../../../components/bun/SpeedChart.astro';
+
+## 압도적인 성능 차이
+
+Bun은 Node.js나 Deno보다 훨씬 빠른 시작 속도를 자랑합니다.  
+서버 사이드 렌더링(SSR) 성능에서 그 진가가 드러납니다.
+
+<SpeedChart 
+  max={4}
+  data={[
+    { label: 'Node.js', value: 1 },
+    { label: 'Deno', value: 2 },
+    { label: 'Bun', value: 4, highlight: true }
+  ]}
+/>
+
+> *React SSR 초당 요청 처리량 비교 (상대적 수치)*
+
+기존 도구들이 느리다고 느껴지셨나요?  
+**Bun은 기다림을 없애줍니다.**

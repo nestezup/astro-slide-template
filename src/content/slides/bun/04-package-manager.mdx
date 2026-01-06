@@ -1,0 +1,22 @@
+---
+title: "초고속 패키지 매니저"
+order: 104
+---
+import Terminal from '../../../components/bun/Terminal.astro';
+
+## npm install보다 30배 빠름
+
+`npm`, `yarn`, `pnpm`...  
+Bun은 이 모든 것들을 대체할 수 있는 자체 패키지 매니저를 내장하고 있습니다.
+
+<Terminal title="terminal" command="bun install">
+  <div style="color: #4AF626">
+    Saved lockfile<br/>
+    <br/>
+    + 124 packages installed [45ms]
+  </div>
+</Terminal>
+
+* **Global Cache**: 중복 다운로드 방지
+* **Binary Lockfile**: 텍스트보다 빠른 파싱 속도
+* **Compatibility**: `package.json` 완벽 호환

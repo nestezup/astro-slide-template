@@ -1,0 +1,26 @@
+---
+title: "Bun HTTP 서버"
+order: 105
+---
+import Terminal from '../../../components/bun/Terminal.astro';
+
+## 웹 표준 API 기반
+
+Express보다 간단하고, Fastify보다 빠릅니다.  
+`Bun.serve` 하나면 충분합니다.
+
+```javascript
+// server.js
+Bun.serve({
+  port: 3000,
+  fetch(req) {
+    return new Response("Hello from Bun!");
+  },
+});
+```
+
+<Terminal title="console" command="bun run server.js">
+  Listening on http://localhost:3000
+</Terminal>
+
+웹 표준 `Request`와 `Response` 객체를 그대로 사용합니다.

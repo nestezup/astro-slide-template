@@ -1,0 +1,18 @@
+---
+title: "Node.js 호환성"
+order: 108
+---
+import SpeedChart from '../../../components/bun/SpeedChart.astro';
+
+## Drop-in Replacement
+
+Bun은 Node.js API의 90% 이상을 구현했습니다.  
+기존 Node.js 애플리케이션을 수정 없이 실행하는 것이 목표입니다.
+
+* `fs`, `path`, `http` 등 코어 모듈 지원
+* `node_modules` 해석 알고리즘 지원
+* 대부분의 npm 패키지 작동
+
+> **"Works just like Node, but faster."**
+
+단, 일부 C++ Addon이나 특정 엣지 케이스는 아직 지원 중입니다.

@@ -1,0 +1,82 @@
+---
+interface Props {
+  data: { label: string; value: number; highlight?: boolean }[];
+  max?: number;
+}
+
+const { data, max = 100 } = Astro.props;
+---
+
+<div class="chart-container">
+  {data.map(item => (
+    <div class={`chart-row ${item.highlight ? 'highlight' : ''}`}>
+      <div class="label">{item.label}</div>
+      <div class="bar-container">
+        <div class="bar" style={`width: ${(item.value / max) * 100}%`}>
+          <span class="value">{item.value}x</span>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .chart-container {
+    margin: 2rem 0;
+    font-family: var(--font-main);
+  }
+
+  .chart-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    opacity: 0.7;
+    transition: all 0.3s;
+  }
+
+  .chart-row.highlight {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+
+  .chart-row.highlight .label {
+    font-weight: bold;
+    color: var(--color-primary);
+  }
+
+  .chart-row.highlight .bar {
+    background: linear-gradient(90deg, #f472b6, #db2777);
+  }
+
+  .label {
+    width: 120px;
+    font-size: 1.2rem;
+    text-align: right;
+    padding-right: 1rem;
+  }
+
+  .bar-container {
+    flex: 1;
+    background: #f1f5f9;
+    border-radius: 999px;
+    height: 40px;
+    overflow: hidden;
+  }
+
+  .bar {
+    height: 100%;
+    background: #94a3b8;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    padding-right: 1rem;
+    justify-content: flex-end;
+    transition: width 1s ease-out;
+  }
+
+  .value {
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+</style>

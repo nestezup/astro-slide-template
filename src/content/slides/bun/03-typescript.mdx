@@ -1,0 +1,32 @@
+---
+title: "TypeScript 기본 지원"
+order: 103
+---
+import Terminal from '../../../components/bun/Terminal.astro';
+
+## 설정 파일(.tsconfig) 없이 바로 실행
+
+더 이상 `ts-node`나 복잡한 빌드 설정이 필요 없습니다.  
+Bun은 **TypeScript**를 1급 시민으로 대우합니다.
+
+<Terminal title="index.ts" command="bun run index.ts">
+  <div style="color: #e0e0e0">
+    Hello from TypeScript!<br/>
+    Type checking skipped for speed (transpilation only).
+  </div>
+</Terminal>
+
+```typescript
+// index.ts
+interface User {
+  name: string;
+  id: number;
+}
+
+const user: User = {
+  name: "Bun",
+  id: 1,
+};
+
+console.log(`Hello, ${user.name}!`);
+```

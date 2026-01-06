@@ -1,22 +1,23 @@
-FROM node:20-alpine AS builder
+FROM oven/bun:1 AS base
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm ci
+COPY package.json bun.lockb ./
+RUN bun install --frozen-lockfile
 
 COPY . .
-RUN npm run build
 
-FROM node:20-alpine
+RUN bun run build
+
+FROM oven/bun:1 AS release
 WORKDIR /app
 
-COPY --from=builder /app/package*.json ./
-RUN npm ci --only=production
-
-COPY --from=builder /app/dist ./dist
+COPY --from=base /app/node_modules ./node_modules
+COPY --from=base /app/dist ./dist
+COPY --from=base /app/package.json ./
 
 ENV HOST=0.0.0.0
-ENV PORT=80
-EXPOSE 80
+ENV PORT=4321
 
-CMD ["npx", "astro", "preview", "--port", "80", "--host", "--allowed-hosts"]
+EXPOSE 4321
+
+CMD ["bun", "run", "./dist/server/entry.mjs"]
