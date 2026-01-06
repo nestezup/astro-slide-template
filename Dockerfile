@@ -7,9 +7,16 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM nginx:alpine
+FROM node:20-alpine
+WORKDIR /app
 
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/package*.json ./
+RUN npm ci --only=production
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+COPY --from=builder /app/dist ./dist
+
+ENV HOST=0.0.0.0
+ENV PORT=${PORT:-80}
+EXPOSE ${PORT:-80}
+
+CMD ["sh", "-c", "npx astro preview --port $PORT --host"]
