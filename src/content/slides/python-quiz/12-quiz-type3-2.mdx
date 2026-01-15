@@ -1,0 +1,60 @@
+---
+title: "연습문제 12: 학점 계산"
+order: 12
+---
+import QuizQuestion from '../../../components/python/QuizQuestion.astro';
+import QuizAnswer from '../../../components/python/QuizAnswer.astro';
+
+<QuizQuestion number={12} title="다중 조건문 (if-elif-else)">
+  점수를 입력받아 학점을 출력하세요.
+
+  **학점 기준**
+  - 90점 이상: A
+  - 80점 이상: B
+  - 70점 이상: C
+  - 60점 이상: D
+  - 60점 미만: F
+
+  ### 초기 코드
+  ```python
+  score = int(input())
+
+  if score >= 90:
+      grade = ____
+  elif score >= 80:
+      grade = ____
+  elif score >= 70:
+      grade = ____
+  elif score >= 60:
+      grade = ____
+  else:
+      grade = "F"
+
+  print(f"학점: {grade}")
+  ```
+</QuizQuestion>
+
+<QuizAnswer>
+  ### 정답 코드
+  ```python
+  score = int(input())
+
+  if score >= 90:
+      grade = "A"
+  elif score >= 80:
+      grade = "B"
+  elif score >= 70:
+      grade = "C"
+  elif score >= 60:
+      grade = "D"
+  else:
+      grade = "F"
+
+  print(f"학점: {grade}")
+  ```
+
+  ### 해설
+  1. 조건문은 위에서부터 순서대로 검사됨
+  2. 90 이상이 아니면 자동으로 90 미만인 상태에서 80 이상인지 검사
+  3. 모든 조건에 해당하지 않으면 `else` 블록 실행
+</QuizAnswer>

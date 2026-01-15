@@ -1,0 +1,41 @@
+---
+title: "연습문제 24: 문자열 뒤집기"
+order: 24
+---
+import QuizQuestion from '../../../components/python/QuizQuestion.astro';
+import QuizAnswer from '../../../components/python/QuizAnswer.astro';
+
+<QuizQuestion number={24} title="문자열 조작">
+  문자열을 뒤집는 함수를 작성하세요.
+
+  ### 초기 코드
+  ```python
+  def reverse_string(text):
+      result = ""
+      for char in text:
+          # 문자를 앞에다 계속 붙임
+          result = char + ____
+      return result
+
+  # 테스트
+  print(reverse_string("Python"))  # nohtyP
+  ```
+
+  **힌트**: `result + char`는 정순, `char + result`는 역순이 됩니다.
+</QuizQuestion>
+
+<QuizAnswer>
+  ### 정답 코드
+  ```python
+  def reverse_string(text):
+      result = ""
+      for char in text:
+          result = char + result
+      return result
+  ```
+
+  ### 해설
+  1. 새로운 문자 `char`를 기존 결과 `result` **앞에** 붙임
+  2. 예: "P" -> "y"+"P" -> "t"+"yP" -> ...
+  3. 파이썬 슬라이싱 `text[::-1]`을 쓸 수도 있지만, 여기서는 반복문 활용
+</QuizAnswer>

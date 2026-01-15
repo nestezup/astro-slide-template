@@ -1,0 +1,54 @@
+---
+title: "연습문제 15: 계절 판별"
+order: 15
+---
+import QuizQuestion from '../../../components/python/QuizQuestion.astro';
+import QuizAnswer from '../../../components/python/QuizAnswer.astro';
+
+<QuizQuestion number={15} title="리스트와 in 연산자">
+  월(month)을 입력받아 계절을 출력하세요.
+
+  **계절 분류**
+  - 봄: 3, 4, 5월
+  - 여름: 6, 7, 8월
+  - 가을: 9, 10, 11월
+  - 겨울: 12, 1, 2월
+
+  ### 초기 코드
+  ```python
+  month = int(input())
+
+  if month in [3, 4, 5]:
+      season = "봄"
+  elif month in [6, 7, 8]:
+      season = "여름"
+  elif month in [________]:
+      season = "가을"
+  else:
+      season = "겨울"
+
+  print(season)
+  ```
+</QuizQuestion>
+
+<QuizAnswer>
+  ### 정답 코드
+  ```python
+  month = int(input())
+
+  if month in [3, 4, 5]:
+      season = "봄"
+  elif month in [6, 7, 8]:
+      season = "여름"
+  elif month in [9, 10, 11]:
+      season = "가을"
+  else:
+      season = "겨울"
+
+  print(season)
+  ```
+
+  ### 해설
+  1. `in` 연산자는 리스트 안에 값이 있는지 확인
+  2. 9, 10, 11월은 가을에 해당하므로 `[9, 10, 11]` 리스트 사용
+</QuizAnswer>

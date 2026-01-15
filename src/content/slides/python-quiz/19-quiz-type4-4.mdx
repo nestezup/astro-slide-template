@@ -1,0 +1,38 @@
+---
+title: "연습문제 19: 리스트 요소 합계"
+order: 19
+---
+import QuizQuestion from '../../../components/python/QuizQuestion.astro';
+import QuizAnswer from '../../../components/python/QuizAnswer.astro';
+
+<QuizQuestion number={19} title="리스트 순회 (for-in)">
+  정수 리스트가 주어질 때, 모든 요소의 합을 계산하여 출력하세요.
+
+  ### 초기 코드
+  ```python
+  numbers = [10, 20, 30, 40, 50]
+
+  total = 0
+  for num in ____:
+      total += ____
+
+  print(f"합계: {total}")
+  ```
+</QuizQuestion>
+
+<QuizAnswer>
+  ### 정답 코드
+  ```python
+  numbers = [10, 20, 30, 40, 50]
+
+  total = 0
+  for num in numbers:
+      total += num
+
+  print(f"합계: {total}")
+  ```
+
+  ### 해설
+  1. `for num in numbers`: 리스트 `numbers`의 각 요소를 하나씩 꺼내 `num` 변수에 담음
+  2. `total += num`: 꺼낸 값을 `total`에 계속 더함
+</QuizAnswer>

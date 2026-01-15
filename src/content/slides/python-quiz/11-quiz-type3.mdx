@@ -1,0 +1,48 @@
+---
+title: "연습문제 11: 나이 판별"
+order: 11
+---
+import QuizQuestion from '../../../components/python/QuizQuestion.astro';
+import QuizAnswer from '../../../components/python/QuizAnswer.astro';
+
+<QuizQuestion number={11} title="조건문과 나이 계산">
+  출생 연도를 입력받아, 나이 계산 방식에 따라 나이를 출력하세요.
+  (현재 연도는 **2026년**으로 가정)
+
+  **계산 방식**
+  - **Korea**: 한국식 나이 (2026 - 출생연도 + 1)
+  - **Year**: 연 나이 (2026 - 출생연도)
+
+  ### 초기 코드
+  ```python
+  year = int(input())
+  age_type = input() # "Korea" 또는 "Year" 입력
+
+  if age_type == ____:
+      answer = 2026 - year + 1
+  elif age_type == "Year":
+      answer = ____
+
+  print(answer)
+  ```
+</QuizQuestion>
+
+<QuizAnswer>
+  ### 정답 코드
+  ```python
+  year = int(input())
+  age_type = input()
+
+  if age_type == "Korea":
+      answer = 2026 - year + 1
+  elif age_type == "Year":
+      answer = 2026 - year
+
+  print(answer)
+  ```
+
+  ### 해설
+  1. `age_type`이 "Korea"와 같은지 비교 (`==`)
+  2. `elif` 조건에서는 "Year"인 경우를 처리
+  3. 연 나이는 태어난 해에 0살이므로 `2026 - year`
+</QuizAnswer>

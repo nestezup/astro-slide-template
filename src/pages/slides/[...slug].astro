@@ -9,7 +9,7 @@ import Navigation from '../../components/Navigation.astro';
 export async function getStaticPaths() {
   const slides = await getCollection('slides');
   return slides.map((slide: any) => ({
-    params: { slug: slide.id },
+    params: { slug: slide.id.replace(/\.(md|mdx)$/, '') },
     props: { slide, allSlides: slides },
   }));
 }

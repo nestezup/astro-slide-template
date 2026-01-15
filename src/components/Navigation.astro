@@ -5,7 +5,14 @@ interface Props {
 }
 
 const { slides, currentSlug } = Astro.props;
-const sortedSlides = slides.sort((a, b) => a.data.order - b.data.order);
+
+// 현재 슬라이드의 경로에 따라 컬렉션 결정
+const isQuiz = currentSlug.startsWith('python-quiz/');
+const collectionPrefix = isQuiz ? 'python-quiz/' : 'python2026/';
+
+// 해당 컬렉션의 슬라이드만 필터링
+const filteredSlides = slides.filter((slide: any) => slide.id.startsWith(collectionPrefix));
+const sortedSlides = filteredSlides.sort((a, b) => a.data.order - b.data.order);
 const currentIndex = sortedSlides.findIndex(slide => slide.id === currentSlug);
 const prevSlide = currentIndex > 0 ? sortedSlides[currentIndex - 1] : null;
 const nextSlide = currentIndex < sortedSlides.length - 1 ? sortedSlides[currentIndex + 1] : null;
@@ -13,7 +20,7 @@ const nextSlide = currentIndex < sortedSlides.length - 1 ? sortedSlides[currentI
 
 <nav class="slide-navigation">
   {prevSlide && (
-    <a href={`/slides/${prevSlide.id}`} class="nav-button prev" title={prevSlide.data.title}>
+    <a href={`/slides/${prevSlide.id.replace(/\.(md|mdx)$/, '')}`} class="nav-button prev" title={prevSlide.data.title}>
       <span class="nav-arrow">←</span>
     </a>
   )}
@@ -23,7 +30,7 @@ const nextSlide = currentIndex < sortedSlides.length - 1 ? sortedSlides[currentI
   </div>
   
   {nextSlide && (
-    <a href={`/slides/${nextSlide.id}`} class="nav-button next" title={nextSlide.data.title}>
+    <a href={`/slides/${nextSlide.id.replace(/\.(md|mdx)$/, '')}`} class="nav-button next" title={nextSlide.data.title}>
       <span class="nav-arrow">→</span>
     </a>
   )}

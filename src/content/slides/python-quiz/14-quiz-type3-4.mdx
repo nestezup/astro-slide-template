@@ -1,0 +1,49 @@
+---
+title: "연습문제 14: 최댓값 찾기"
+order: 14
+---
+import QuizQuestion from '../../../components/python/QuizQuestion.astro';
+import QuizAnswer from '../../../components/python/QuizAnswer.astro';
+
+<QuizQuestion number={14} title="논리 연산자 (and)">
+  세 개의 정수를 입력받아 가장 큰 수를 출력하세요.
+
+  ### 초기 코드
+  ```python
+  a = int(input())
+  b = int(input())
+  c = int(input())
+
+  if a >= b and a >= c:
+      max_num = ____
+  elif b >= a and b >= c:
+      max_num = ____
+  else:
+      max_num = ____
+
+  print(f"최댓값: {max_num}")
+  ```
+</QuizQuestion>
+
+<QuizAnswer>
+  ### 정답 코드
+  ```python
+  a = int(input())
+  b = int(input())
+  c = int(input())
+
+  if a >= b and a >= c:
+      max_num = a
+  elif b >= a and b >= c:
+      max_num = b
+  else:
+      max_num = c
+
+  print(f"최댓값: {max_num}")
+  ```
+
+  ### 해설
+  1. `a`가 `b`보다 크거나 같고(`and`) `c`보다 크거나 같으면 `a`가 최댓값
+  2. `b`가 `a`보다 크거나 같고 `c`보다 크거나 같으면 `b`가 최댓값
+  3. 둘 다 아니면 `c`가 최댓값
+</QuizAnswer>

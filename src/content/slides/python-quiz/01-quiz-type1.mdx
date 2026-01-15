@@ -1,0 +1,47 @@
+---
+title: "연습문제 1: 변수와 출력"
+order: 1
+---
+import QuizQuestion from '../../../components/python/QuizQuestion.astro';
+import QuizAnswer from '../../../components/python/QuizAnswer.astro';
+
+<QuizQuestion number={1} title="변수와 자료형의 이해">
+  주어진 초기 코드는 변수에 데이터를 저장하고 출력하는 코드입니다.<br/>
+  아래와 같이 출력되도록 빈칸을 채워 코드를 완성해 주세요.
+
+  ### 출력 예시
+  ```text
+  Winter is coming
+  25
+  520
+  ```
+
+  ### 초기 코드
+  ```python
+  string_msg = ____
+  int_val = ____
+  string_val = ____
+
+  print(string_msg)
+  print(int_val + 12)
+  print(string_val + "20")
+  ```
+</QuizQuestion>
+
+<QuizAnswer>
+  ### 정답 코드
+  ```python
+  string_msg = "Winter is coming"
+  int_val = 13
+  string_val = "5"
+
+  print(string_msg)      # "Winter is coming"
+  print(int_val + 12)    # 13 + 12 = 25
+  print(string_val + "20") # "5" + "20" = "520"
+  ```
+
+  ### 해설
+  1. `string_msg`: 문자열 그대로 저장
+  2. `int_val`: 12를 더해서 25가 되어야 하므로 13 (정수)
+  3. `string_val`: 문자열 "20"을 붙여서 "520"이 되어야 하므로 "5" (문자열)
+</QuizAnswer>

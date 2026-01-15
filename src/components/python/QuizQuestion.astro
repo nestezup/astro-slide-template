@@ -1,0 +1,91 @@
+---
+interface Props {
+  number: number;
+  title?: string;
+}
+
+const { number, title } = Astro.props;
+---
+
+<div class="quiz-question">
+  <div class="quiz-header">
+    <span class="quiz-number">Q{number}</span>
+    {title && <span class="quiz-title">{title}</span>}
+  </div>
+  <div class="quiz-content">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .quiz-question {
+    background: #ffffff;
+    border: 2px solid #e2e8f0;
+    border-left: 6px solid #2563eb; /* Primary accent color */
+    border-radius: 8px;
+    padding: 2rem;
+    margin: 1.5rem 0;
+    color: #1e293b;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .quiz-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .quiz-number {
+    background: #eff6ff;
+    color: #2563eb;
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    font-weight: var(--font-weight-bold);
+    font-size: 1.1rem;
+    border: 1px solid #bfdbfe;
+  }
+
+  .quiz-title {
+    font-size: 1.4rem;
+    font-weight: var(--font-weight-bold);
+    color: #1e293b;
+  }
+
+  .quiz-content {
+    font-family: var(--font-main);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #334155;
+  }
+
+  /* Markdown content styling */
+  .quiz-content :global(pre) {
+    background: #1e293b !important; /* Ensure dark background for code */
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    border: 1px solid #cbd5e1;
+    margin: 1.2rem 0;
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .quiz-content :global(code) {
+    font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+    font-size: 1.05rem;
+  }
+
+  .quiz-content :global(p) {
+    margin: 1rem 0;
+    color: #334155;
+  }
+  
+  .quiz-content :global(strong) {
+    color: #0f172a;
+    font-weight: 700;
+    background: #fef08a; /* Highlight effect for strong text */
+    padding: 0 4px;
+  }
+</style>

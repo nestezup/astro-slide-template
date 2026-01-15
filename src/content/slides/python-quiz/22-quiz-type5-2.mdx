@@ -1,0 +1,42 @@
+---
+title: "연습문제 22: 리스트 최댓값"
+order: 22
+---
+import QuizQuestion from '../../../components/python/QuizQuestion.astro';
+import QuizAnswer from '../../../components/python/QuizAnswer.astro';
+
+<QuizQuestion number={22} title="알고리즘: 최댓값 찾기">
+  정수 리스트에서 최댓값을 찾는 함수를 작성하세요.
+
+  ### 초기 코드
+  ```python
+  def find_max(numbers):
+      max_value = numbers[0]
+      for num in numbers:
+          # 현재 값(num)이 최댓값(max_value)보다 크다면
+          if num > ____:
+              max_value = ____
+      return max_value
+
+  # 테스트
+  result = find_max([3, 7, 2, 9, 1])
+  print(result)  # 9
+  ```
+</QuizQuestion>
+
+<QuizAnswer>
+  ### 정답 코드
+  ```python
+  def find_max(numbers):
+      max_value = numbers[0]
+      for num in numbers:
+          if num > max_value:
+              max_value = num
+      return max_value
+  ```
+
+  ### 해설
+  1. 첫 번째 값을 잠정적인 최댓값으로 설정
+  2. 리스트를 순회하며 현재 `num`이 `max_value`보다 크면 교체
+  3. 순회가 끝나면 `max_value`에 가장 큰 값이 남음
+</QuizAnswer>

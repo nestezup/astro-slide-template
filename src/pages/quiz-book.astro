@@ -1,0 +1,135 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import QuizQuestion from '../components/python/QuizQuestion.astro';
+import QuizAnswer from '../components/python/QuizAnswer.astro';
+
+// 모든 슬라이드 가져오기
+const allSlides = await getCollection('slides');
+
+// 퀴즈 슬라이드만 필터링 (python-quiz 폴더)
+const quizSlides = allSlides
+  .filter((slide: any) => slide.id.startsWith('python-quiz/'))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout title="파이썬 연습문제 모음집">
+  <div class="quiz-book-container">
+    <header class="book-header">
+      <h1>🐍 파이썬 프로그래밍 연습문제</h1>
+      <p>총 {quizSlides.length}문제</p>
+      <button onclick="window.print()" class="print-btn">🖨️ PDF로 저장 / 인쇄</button>
+    </header>
+
+    <div class="quiz-list">
+      {quizSlides.map(async (slide: any) => {
+        const { Content } = await slide.render();
+        return (
+          <article class="quiz-item">
+            <div class="quiz-meta">
+              <span class="quiz-badge">문제 {slide.data.order}</span>
+              <h2>{slide.data.title}</h2>
+            </div>
+            <div class="quiz-body">
+              <Content />
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .quiz-book-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: white;
+    min-height: 100vh;
+  }
+
+  .book-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 3px solid #e5e7eb;
+  }
+
+  .book-header h1 {
+    font-size: 2.5rem;
+    color: #2563eb;
+    margin-bottom: 0.5rem;
+  }
+
+  .print-btn {
+    background: #1f2937;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+
+  .print-btn:hover {
+    background: #374151;
+  }
+
+  .quiz-item {
+    margin-bottom: 4rem;
+    page-break-inside: avoid; /* 인쇄 시 문제 중간이 잘리지 않도록 */
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .quiz-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #f3f4f6;
+    padding-bottom: 1rem;
+  }
+
+  .quiz-badge {
+    background: #2563eb;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+
+  .quiz-meta h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #1f2937;
+  }
+
+  /* 인쇄 전용 스타일 */
+  @media print {
+    .sidebar, .slide-navigation, .print-btn {
+      display: none !important;
+    }
+
+    .main-content {
+      margin: 0 !important;
+      width: 100% !important;
+    }
+
+    .quiz-book-container {
+      padding: 0;
+      max-width: none;
+    }
+
+    .quiz-item {
+      box-shadow: none;
+      border: 1px solid #ccc;
+      break-inside: avoid;
+    }
+  }
+</style>

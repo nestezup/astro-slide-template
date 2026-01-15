@@ -1,0 +1,40 @@
+---
+title: "연습문제 13: 홀수/짝수 판별"
+order: 13
+---
+import QuizQuestion from '../../../components/python/QuizQuestion.astro';
+import QuizAnswer from '../../../components/python/QuizAnswer.astro';
+
+<QuizQuestion number={13} title="나머지 연산자 활용">
+  정수를 입력받아 홀수인지 짝수인지 판별하세요.
+
+  ### 초기 코드
+  ```python
+  num = int(input())
+
+  # 2로 나눈 나머지가 0이면 짝수
+  if num % 2 == ____:
+      print("짝수입니다")
+  else:
+      print("홀수입니다")
+  ```
+
+  **힌트**: 나머지 연산자 `%`를 사용하세요.
+</QuizQuestion>
+
+<QuizAnswer>
+  ### 정답 코드
+  ```python
+  num = int(input())
+
+  if num % 2 == 0:
+      print("짝수입니다")
+  else:
+      print("홀수입니다")
+  ```
+
+  ### 해설
+  1. `num % 2`의 결과가 0이면 짝수
+  2. 0이 아니면(1이면) 홀수
+  3. 비교 연산자 `==` 사용 주의 (대입 연산자 `=` 아님)
+</QuizAnswer>

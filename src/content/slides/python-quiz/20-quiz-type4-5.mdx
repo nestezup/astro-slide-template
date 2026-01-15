@@ -1,0 +1,39 @@
+---
+title: "연습문제 20: 짝수만 출력"
+order: 20
+---
+import QuizQuestion from '../../../components/python/QuizQuestion.astro';
+import QuizAnswer from '../../../components/python/QuizAnswer.astro';
+
+<QuizQuestion number={20} title="반복문과 조건문의 결합">
+  1부터 20까지의 숫자 중 짝수만 출력하세요.
+
+  ### 출력 예시
+  ```text
+  2
+  4
+  6
+  ...
+  20
+  ```
+
+  ### 초기 코드
+  ```python
+  for i in range(1, 21):
+      if i % 2 == ____:
+          print(i)
+  ```
+</QuizQuestion>
+
+<QuizAnswer>
+  ### 정답 코드
+  ```python
+  for i in range(1, 21):
+      if i % 2 == 0:
+          print(i)
+  ```
+
+  ### 해설
+  1. `range(1, 21)`: 1부터 20까지 숫자 생성
+  2. `i % 2 == 0`: 2로 나눈 나머지가 0인 수 (짝수)만 필터링
+</QuizAnswer>

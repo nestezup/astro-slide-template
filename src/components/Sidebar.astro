@@ -5,28 +5,40 @@ interface Props {
 }
 
 const { slides, currentSlug } = Astro.props;
-const sortedSlides = slides.sort((a, b) => a.data.order - b.data.order);
+
+// 현재 슬라이드의 경로에 따라 컬렉션 결정 (강의 vs 연습문제)
+const isQuiz = currentSlug.startsWith('python-quiz/');
+const collectionPrefix = isQuiz ? 'python-quiz/' : 'python2026/';
+const sidebarTitle = isQuiz ? '연습문제 목록' : '강의 목차';
+
+// 해당 컬렉션의 슬라이드만 필터링
+const filteredSlides = slides.filter((slide: any) => slide.id.startsWith(collectionPrefix));
+const sortedSlides = filteredSlides.sort((a, b) => a.data.order - b.data.order);
 ---
 
 <aside class="sidebar">
   <div class="sidebar-header">
-    <h2 class="sidebar-title">강의 목차</h2>
+    <h2 class="sidebar-title">{sidebarTitle}</h2>
   </div>
   
   <nav class="sidebar-nav">
     <ul class="nav-list">
-      {sortedSlides.map((slide: any) => (
+      {sortedSlides.map((slide: any) => {
+        // 사이드바에서는 "연습문제 N:" 같은 중복 텍스트 제거하고 깔끔하게 표시
+        const displayTitle = slide.data.title.replace(/^연습문제 \d+:\s*/, '');
+        
+        return (
         <li class="nav-item">
           <a 
-            href={`/slides/${slide.id}`}
+            href={`/slides/${slide.id.replace(/\.(md|mdx)$/, '')}`}
             class="nav-link"
             class:list={{ active: slide.id === currentSlug }}
           >
             <span class="nav-order">{String(slide.data.order).padStart(2, '0')}</span>
-            <span class="nav-title">{slide.data.title}</span>
+            <span class="nav-title">{displayTitle}</span>
           </a>
         </li>
-      ))}
+      )})}
     </ul>
   </nav>
 
@@ -84,6 +96,8 @@ const sortedSlides = slides.sort((a, b) => a.data.order - b.data.order);
     text-decoration: none;
     transition: all 0.2s ease;
     gap: 0.75rem;
+    position: relative; /* 하이라이트 효과를 위해 추가 */
+    overflow: hidden;
   }
 
   .nav-link:hover {
@@ -91,9 +105,23 @@ const sortedSlides = slides.sort((a, b) => a.data.order - b.data.order);
     color: var(--color-primary);
   }
 
+  /* 활성화 상태가 부드럽게 켜지도록 설정 */
   .nav-link.active {
     background: var(--color-primary);
     color: white;
+    transition: background-color 0.5s ease-out, color 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2); /* 살짝 떠오르는 느낌 */
+  }
+
+  /* 왼쪽에 포인트 바 추가 (선택된 느낌 강조) */
+  .nav-link.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: rgba(255, 255, 255, 0.5);
   }
 
   .nav-order {
@@ -143,3 +171,21 @@ const sortedSlides = slides.sort((a, b) => a.data.order - b.data.order);
     }
   }
 </style>
+
+<script is:inline>
+  // 화면이 그려지기 전에 즉시 실행하여 깜빡임 제거
+  (function() {
+    const sidebar = document.querySelector('.sidebar');
+    const activeLink = sidebar?.querySelector('.nav-link.active');
+    
+    if (sidebar && activeLink) {
+      // 현재 활성화된 항목이 사이드바 중앙에 오도록 스크롤 위치 계산
+      // offsetTop: 항목의 위쪽 위치
+      // sidebar.clientHeight: 사이드바 전체 높이
+      const targetScroll = activeLink.offsetTop - (sidebar.clientHeight / 2) + (activeLink.clientHeight / 2);
+      
+      // 애니메이션 없이 즉시 이동
+      sidebar.scrollTop = targetScroll;
+    }
+  })();
+</script>

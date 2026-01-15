@@ -1,0 +1,198 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title = "정답 보기" } = Astro.props;
+const modalId = `modal-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class="quiz-answer-container">
+  <button class="show-answer-btn" onclick={`document.getElementById('${modalId}').showModal()`}>
+    <span class="btn-icon">✨</span>
+    <span class="btn-text">{title}</span>
+  </button>
+
+  <dialog id={modalId} class="answer-modal">
+    <div class="modal-header">
+      <h3>정답 및 해설</h3>
+      <button class="close-btn" onclick={`document.getElementById('${modalId}').close()`}>✕</button>
+    </div>
+    <div class="modal-body">
+      <slot />
+    </div>
+    <div class="modal-footer">
+      <button class="confirm-btn" onclick={`document.getElementById('${modalId}').close()`}>확인</button>
+    </div>
+  </dialog>
+</div>
+
+<style>
+  .quiz-answer-container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .show-answer-btn {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 999px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .show-answer-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
+  }
+
+  .answer-modal {
+    padding: 0;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    width: 90%;
+    max-height: 85vh;
+    animation: modalFadeIn 0.3s ease;
+  }
+
+  .answer-modal::backdrop {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    animation: backdropFadeIn 0.3s ease;
+  }
+
+  .modal-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8fafc;
+  }
+
+  .modal-header h3 {
+    margin: 0;
+    color: #059669;
+    font-size: 1.3rem;
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #64748b;
+    padding: 0.5rem;
+    line-height: 1;
+    border-radius: 50%;
+    transition: background 0.2s;
+  }
+
+  .close-btn:hover {
+    background: #e2e8f0;
+    color: #ef4444;
+  }
+
+  .modal-body {
+    padding: 2rem;
+    overflow-y: auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  /* Markdown content styles inside modal */
+  .modal-body :global(pre) {
+    background: #1e293b;
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+
+  .modal-body :global(code) {
+    color: #10b981;
+    font-family: 'Menlo', monospace;
+  }
+
+  .modal-body :global(h3) {
+    color: #1f2937;
+    margin-top: 1.5rem;
+  }
+
+  .modal-footer {
+    padding: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+    text-align: right;
+    background: #f8fafc;
+  }
+
+  .confirm-btn {
+    background: #10b981;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .confirm-btn:hover {
+    background: #059669;
+  }
+
+  @keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes backdropFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* PDF Print Styles for Modal */
+  @media print {
+    .quiz-answer-container {
+      display: block;
+      margin-top: 2rem;
+      border: 2px solid #10b981;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+
+    .show-answer-btn {
+      display: none;
+    }
+
+    .answer-modal {
+      display: block;
+      position: static;
+      box-shadow: none;
+      width: 100%;
+      max-width: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .modal-header, .modal-footer, .close-btn {
+      display: none;
+    }
+
+    .modal-body {
+      padding: 0;
+      overflow: visible;
+    }
+  }
+</style>

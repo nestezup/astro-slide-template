@@ -1,0 +1,67 @@
+---
+title: "연습문제 16: 복리 계산 (저축)"
+order: 16
+---
+import QuizQuestion from '../../../components/python/QuizQuestion.astro';
+import QuizAnswer from '../../../components/python/QuizAnswer.astro';
+
+<QuizQuestion number={16} title="while 반복문 활용">
+  목표 금액 100만 원을 모으기 위해 저축을 하려고 합니다.
+  
+  **저축 계획**
+  1. 첫 달에는 `start` 금액을 저축합니다.
+  2. 총 저축액이 70만 원 미만일 때는 매달 `before` 금액을 저축합니다.
+  3. 총 저축액이 70만 원 이상, 100만 원 미만일 때는 매달 `after` 금액을 저축합니다.
+  4. 100만 원 이상이 되면 저축을 멈춥니다.
+
+  총 몇 개월이 걸리는지 계산하는 코드를 완성하세요.
+
+  ### 초기 코드
+  ```python
+  start = int(input())
+  before = int(input())
+  after = int(input())
+
+  money = start
+  month = 1
+
+  # 1단계: 70만원 미만일 때
+  while money < 70:
+      money += ____
+      month += 1
+
+  # 2단계: 70만원 이상 100만원 미만일 때
+  while ____ < 100:
+      money += ____
+      month += 1
+
+  print(month)
+  ```
+</QuizQuestion>
+
+<QuizAnswer>
+  ### 정답 코드
+  ```python
+  start = int(input())
+  before = int(input())
+  after = int(input())
+
+  money = start
+  month = 1
+
+  while money < 70:
+      money += before  # 70만원 전까지는 before 금액 저축
+      month += 1
+
+  while money < 100:   # 100만원 전까지는
+      money += after   # after 금액 저축
+      month += 1
+
+  print(month)
+  ```
+
+  ### 해설
+  1. 첫 번째 `while`: `money`가 70보다 작을 동안 `before`를 계속 더함
+  2. 두 번째 `while`: `money`가 100보다 작을 동안 `after`를 계속 더함
+  3. `+=` 연산자는 `money = money + 값`과 동일
+</QuizAnswer>

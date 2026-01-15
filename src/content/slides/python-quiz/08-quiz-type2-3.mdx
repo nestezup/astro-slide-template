@@ -1,0 +1,42 @@
+---
+title: "연습문제 8: 직사각형 둘레와 넓이"
+order: 8
+---
+import QuizQuestion from '../../../components/python/QuizQuestion.astro';
+import QuizAnswer from '../../../components/python/QuizAnswer.astro';
+
+<QuizQuestion number={8} title="변수 활용과 사칙연산">
+  직사각형의 가로 `width`와 세로 `height`가 주어질 때, 
+  둘레와 넓이를 계산하여 출력하세요.
+
+  ### 초기 코드
+  ```python
+  width = int(input())
+  height = int(input())
+
+  perimeter = ____
+  area = ____
+
+  print(f"둘레: {perimeter}")
+  print(f"넓이: {area}")
+  ```
+</QuizQuestion>
+
+<QuizAnswer>
+  ### 정답 코드
+  ```python
+  width = int(input())
+  height = int(input())
+
+  perimeter = 2 * (width + height)
+  area = width * height
+
+  print(f"둘레: {perimeter}")
+  print(f"넓이: {area}")
+  ```
+
+  ### 해설
+  1. 둘레: (가로 + 세로) × 2
+  2. 넓이: 가로 × 세로
+  3. 괄호 `()`를 사용하여 덧셈을 먼저 계산해야 함
+</QuizAnswer>

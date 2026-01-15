@@ -1,0 +1,37 @@
+---
+title: "연습문제 9: 평균 계산"
+order: 9
+---
+import QuizQuestion from '../../../components/python/QuizQuestion.astro';
+import QuizAnswer from '../../../components/python/QuizAnswer.astro';
+
+<QuizQuestion number={9} title="평균 구하기">
+  세 과목의 점수가 주어질 때, 평균을 계산하여 출력하세요.
+
+  ### 초기 코드
+  ```python
+  score1 = int(input())
+  score2 = int(input())
+  score3 = int(input())
+
+  average = ____
+  print(f"평균: {average:.1f}")
+  ```
+</QuizQuestion>
+
+<QuizAnswer>
+  ### 정답 코드
+  ```python
+  score1 = int(input())
+  score2 = int(input())
+  score3 = int(input())
+
+  average = (score1 + score2 + score3) / 3
+  print(f"평균: {average:.1f}")
+  ```
+
+  ### 해설
+  1. 세 점수를 모두 더한 후 3으로 나눔
+  2. 덧셈을 먼저 하기 위해 반드시 괄호 `()` 사용
+  3. `:.1f`는 소수점 첫째자리까지 표시하는 f-string 서식
+</QuizAnswer>

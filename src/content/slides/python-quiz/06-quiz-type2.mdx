@@ -1,0 +1,50 @@
+---
+title: "연습문제 6: 피타고라스 정리"
+order: 6
+---
+import QuizQuestion from '../../../components/python/QuizQuestion.astro';
+import QuizAnswer from '../../../components/python/QuizAnswer.astro';
+
+<QuizQuestion number={6} title="수학 연산과 제곱">
+  직각삼각형의 두 변의 길이를 나타내는 정수 `a`와 빗변의 길이를 나타내는 정수 `c`가 주어질 때, 
+  다른 한 변의 길이의 제곱 `b_square`를 출력하도록 코드를 완성해 주세요.
+
+  ```
+        c
+      /|
+     / |
+    /  | b
+   /   |
+  /_____| 
+     a
+  ```
+
+  $$ a^2 + b^2 = c^2 $$
+
+  ### 초기 코드
+  ```python
+  a = int(input())
+  c = int(input())
+
+  # b² = c² - a² 공식을 코드로 구현하세요
+  b_square = ____
+  print(b_square)
+  ```
+</QuizQuestion>
+
+<QuizAnswer>
+  ### 정답 코드
+  ```python
+  a = int(input())
+  c = int(input())
+
+  # 제곱 연산자(**)를 사용
+  b_square = (c ** 2) - (a ** 2)
+  print(b_square)
+  ```
+
+  ### 해설
+  1. 피타고라스 정리: $a^2 + b^2 = c^2$
+  2. $b^2$를 구하려면 $c^2 - a^2$를 계산해야 함
+  3. 파이썬에서 제곱은 `**` 연산자 사용 (예: `c ** 2`)
+</QuizAnswer>

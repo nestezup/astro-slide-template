@@ -1,0 +1,41 @@
+---
+title: "연습문제 5: 딕셔너리 출력"
+order: 5
+---
+import QuizQuestion from '../../../components/python/QuizQuestion.astro';
+import QuizAnswer from '../../../components/python/QuizAnswer.astro';
+
+<QuizQuestion number={5} title="딕셔너리 값 접근">
+  딕셔너리의 값을 활용하여 다음과 같이 출력되도록 코드를 완성하세요.
+
+  ### 출력 예시
+  ```text
+  학생 이름: 홍길동
+  학생 나이: 20
+  학생 학과: 컴퓨터공학
+  ```
+
+  ### 초기 코드
+  ```python
+  student = {"name": "홍길동", "age": 20, "major": "컴퓨터공학"}
+
+  print(f"학생 이름: {student[     ]}")
+  print(f"학생 나이: {student[     ]}")
+  print(f"학생 학과: {student[     ]}")
+  ```
+</QuizQuestion>
+
+<QuizAnswer>
+  ### 정답 코드
+  ```python
+  student = {"name": "홍길동", "age": 20, "major": "컴퓨터공학"}
+
+  print(f"학생 이름: {student['name']}")
+  print(f"학생 나이: {student['age']}")
+  print(f"학생 학과: {student['major']}")
+  ```
+
+  ### 해설
+  1. 딕셔너리는 `변수명['키']` 형태로 값에 접근
+  2. 키(Key)는 따옴표로 감싸야 함 (`'name'`, `'age'`, `'major'`)
+</QuizAnswer>

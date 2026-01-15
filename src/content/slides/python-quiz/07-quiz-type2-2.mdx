@@ -1,0 +1,37 @@
+---
+title: "연습문제 7: 원의 넓이"
+order: 7
+---
+import QuizQuestion from '../../../components/python/QuizQuestion.astro';
+import QuizAnswer from '../../../components/python/QuizAnswer.astro';
+
+<QuizQuestion number={7} title="상수와 연산">
+  원의 반지름 `r`이 주어질 때, 원의 넓이를 계산하여 소수점 둘째자리까지 출력하세요.
+
+  **공식**: 원의 넓이 = $\pi \times r^2$  
+  ($\pi = 3.14159$ 사용)
+
+  ### 초기 코드
+  ```python
+  r = int(input())
+  PI = 3.14159
+
+  area = ____
+  print(round(area, 2))
+  ```
+</QuizQuestion>
+
+<QuizAnswer>
+  ### 정답 코드
+  ```python
+  r = int(input())
+  PI = 3.14159
+
+  area = PI * (r ** 2)
+  print(round(area, 2))
+  ```
+
+  ### 해설
+  1. 반지름의 제곱(`r ** 2`)에 원주율(`PI`)을 곱함
+  2. `round(값, 2)` 함수는 소수점 둘째자리까지 반올림하여 표시
+</QuizAnswer>

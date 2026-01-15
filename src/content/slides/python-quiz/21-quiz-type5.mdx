@@ -1,0 +1,58 @@
+---
+title: "연습문제 21: 방향 이동"
+order: 21
+---
+import QuizQuestion from '../../../components/python/QuizQuestion.astro';
+import QuizAnswer from '../../../components/python/QuizAnswer.astro';
+
+<QuizQuestion number={21} title="문자열 파싱과 좌표 이동">
+  여름이는 강아지를 산책시키려고 합니다. 2차원 좌표평면에서 동/서/남/북 방향으로 1m 단위로 이동합니다. 
+  산책 경로가 담긴 문자열 `route`가 주어질 때, 도착점의 위치 `[east, north]`를 반환하도록 함수를 완성하세요.
+
+  **이동 규칙**
+  - "N": 북쪽으로 +1
+  - "S": 남쪽으로 -1 (북쪽으로 -1)
+  - "E": 동쪽으로 +1
+  - "W": 서쪽으로 -1 (동쪽으로 -1)
+
+  ### 초기 코드
+  ```python
+  def solution(route):
+      east = 0
+      north = 0
+      for i in route:
+          if i == "N":
+              north += 1
+          elif i == "S":
+              ____
+          elif i == "E":
+              ____
+          elif i == ____:
+              ____
+      return [east, north]
+  ```
+</QuizQuestion>
+
+<QuizAnswer>
+  ### 정답 코드
+  ```python
+  def solution(route):
+      east = 0
+      north = 0
+      for i in route:
+          if i == "N":
+              north += 1
+          elif i == "S":
+              north -= 1
+          elif i == "E":
+              east += 1
+          elif i == "W":
+              east -= 1
+      return [east, north]
+  ```
+
+  ### 해설
+  1. `i`가 "S"면 남쪽이므로 `north` 감소
+  2. `i`가 "E"면 동쪽이므로 `east` 증가
+  3. `i`가 "W"면 서쪽이므로 `east` 감소
+</QuizAnswer>
